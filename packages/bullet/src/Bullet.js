@@ -28,6 +28,9 @@ export class Bullet extends Component {
             reverse,
             axisPosition,
 
+            scaleMinimum,
+            scaleMaximum,
+
             margin,
             width,
             height,
@@ -73,9 +76,10 @@ export class Bullet extends Component {
         const enhancedData = data.map(d => {
             const all = [...d.ranges, ...d.measures, ...d.markers]
 
-            const max = Math.max(...all)
+            const max = Math.max(...all, scaleMaximum)
+            const min = scaleMinimum ? scaleMinimum : 0
 
-            const scale = scaleLinear().domain([0, max])
+            const scale = scaleLinear().domain([min, max])
 
             if (layout === 'horizontal') {
                 scale.range(reverse === true ? [width, 0] : [0, width])
