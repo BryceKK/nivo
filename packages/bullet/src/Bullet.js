@@ -75,8 +75,8 @@ export class Bullet extends Component {
 
         const enhancedData = data.map(d => {
             const all = [...d.ranges, ...d.measures, ...d.markers]
-
-            const max = Math.max(...all, scaleMaximum)
+            
+            const max = scaleMaximum ? scaleMaximum : Math.max(...all)
             const min = scaleMinimum ? scaleMinimum : 0
 
             const scale = scaleLinear().domain([min, max])
